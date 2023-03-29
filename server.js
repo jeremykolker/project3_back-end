@@ -3,6 +3,7 @@
 //___________________
 const express = require('express');
 const mongoose = require ('mongoose');
+const cors = require('cors');
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
@@ -32,6 +33,10 @@ app.use(express.static('public'));
 // populates req.body with parsed info from forms - if no data from forms will return an empty object {}
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
+
+// enable CORS for all origins
+app.use(cors());
+
 //___________________
 // Routes
 //___________________
@@ -44,15 +49,3 @@ app.get('/' , (req, res) => {
 //Listener
 //___________________
 app.listen(PORT, () => console.log( 'Listening on port:', PORT));
-
-
-
-
-
-
-
-
-
-
-
-
