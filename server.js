@@ -40,7 +40,7 @@ app.use(cors());
 //___________________
 // Routes
 //___________________
-//localhost:3000
+localhost:3000
 app.get('/' , (req, res) => {
   res.send('Hello World!');
 });
