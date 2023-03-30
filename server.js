@@ -4,6 +4,7 @@
 const express = require('express');
 const mongoose = require ('mongoose');
 const cors = require('cors');
+const Movies = require('./models/movies')
 const app = express ();
 const db = mongoose.connection;
 require('dotenv').config()
@@ -34,16 +35,44 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));// extended: false - does not allow nested objects in query strings
 app.use(express.json());// returns middleware that only parses JSON - may or may not need it depending on your project
 
-// enable CORS for all origins
-app.use(cors());
-
+app.use(cors())
 //___________________
 // Routes
 //___________________
-localhost:3000
-app.get('/' , (req, res) => {
-  res.send('Hello World!');
-});
+//localhost:3000
+// app.get('/' , (req, res) => {
+//   res.send('Hello World!');
+// });
+
+//CREATE
+app.post('/movies', (req,res) => {
+  Movies.create(req.body) 
+  .then((createdMovie) => {
+    res.json(createdMovie)
+  })
+})
+
+//READ
+app.get('/movies', (req, res) => {
+  Movies.find({})
+  .then((foundMovie) => {
+    res.json(foundMovie)
+  })
+})
+
+//UPDATE
+app.put('/movies/:id', (req, res) => {
+  Movies.findByIdAndUpdate(req.params.id, req.body, {new: true})
+  .then((updatedMovie) => res.json(updatedMovie))
+})
+
+//DELETE
+app.delete('/movies/:id', (req, res) => {
+  Movies.findByIdAndRemove(req.params.id)
+  .then((deletedMovie) => {
+    res.json(deletedMovie)
+  })
+})
 
 //___________________
 //Listener
