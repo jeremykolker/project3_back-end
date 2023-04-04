@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
 const movieSchema = new mongoose.Schema({
-    poster: String,
+    poster_path: String,
     title: String,
-    released: Number,
-    plot: String,
-    cast: String,
+    release_date: String,
+    overview: String,
+    vote_average: Number,
+    
 })
 
 const Movies = mongoose.model('Movies', movieSchema)
