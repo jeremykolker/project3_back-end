@@ -5,7 +5,9 @@ const movieSchema = new mongoose.Schema({
     title: String,
     release_date: String,
     overview: String,
-    vote_average: Number
+    vote_average: Number,
+    
+
 })
 
 const Movies = mongoose.model('Movies', movieSchema)
